@@ -1,5 +1,21 @@
-Rails.application.routes.draw do
-  get 'home/index'
-  devise_for :users
+Rails.application.routes.draw do  
   root to: 'home#index'
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :users, only: %[show]      
+    end
+  end
+
+  devise_for :users,
+    defaults: { format: :json },
+    path: '',
+    path_names: {
+      sign_in: 'api/v1/login',
+      sign_out: 'api/v1/logout',
+      registration: 'api/v1/signup'
+    },
+    controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
+    }
 end

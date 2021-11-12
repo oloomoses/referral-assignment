@@ -19,4 +19,17 @@ class ApplicationController < ActionController::Base
       ]
     }, status: :bad_request
   end
+
+  def errors_not_authorized
+    render json: {
+      errors:
+        [
+          {
+            message: 'Oops! You are not authorized!',
+            title: 'Not_authorised_user',
+            status: 401
+          }
+        ]
+    }, status: 401
+  end
 end

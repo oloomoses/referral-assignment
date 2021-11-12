@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
+
   def render_resource(resource)
     if resource.errors.empty?
       render json: resource
@@ -31,5 +34,28 @@ class ApplicationController < ActionController::Base
           }
         ]
     }, status: 401
+  end  
+
+  def not_found
+    render json: {
+      'errors': [
+        {
+          'status': '404',
+          'title': 'Not Found!'
+        }
+      ]
+    }, status: 404
+  end
+
+  def record_invalid
+    render json: {
+      errors: [
+        {
+          message: 'Oops! something went wrong!',
+          status: '400',
+          title: 'Invalid Record'
+        }
+      ]
+    }, status: 400
   end
 end

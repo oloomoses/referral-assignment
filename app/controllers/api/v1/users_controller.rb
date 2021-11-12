@@ -6,8 +6,8 @@ module Api
 
 
       def show
-        if current_user.id == @user.id
-          render json: current_user
+        if current_user == @user
+          render json: current_user, include: :referals, status: 200
         else
           errors_not_authorized
         end

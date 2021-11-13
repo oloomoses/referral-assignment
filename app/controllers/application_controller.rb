@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
+  skip_before_action :verify_authenticity_token
+  before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
-
+  
   def render_resource(resource)
     if resource.errors.empty?
       render json: resource
@@ -57,5 +59,11 @@ class ApplicationController < ActionController::Base
         }
       ]
     }, status: 400
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end
 end

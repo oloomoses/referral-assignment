@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
       registrations: 'users/registrations'
     }
+
+    # get '*path', to: 'home#index', via: :all
 end

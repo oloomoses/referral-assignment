@@ -7,5 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     sign_up(resource_name, resource) if resource.persisted?
 
     render_resource(resource)
+
+    # render json: resource
   end
 end

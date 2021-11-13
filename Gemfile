@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'devise-jwt'
 gem 'rack-cors'
-gem 'jsonapi-rails'
+gem 'jsonapi-serializer'
 
 
 

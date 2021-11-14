@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+// import { Redirect } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -31,27 +32,42 @@ const theme = createTheme();
 
 const LoginContainer = () => {
 
+  const [loginErrors, setloginErrors] = useState()
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     const userData = {
-      email: data.get('email'),
-      password: data.get('password'),
+      user: {
+        email: data.get('email'),
+        password: data.get('password'),
+      }        
     };
 
-    console.log(userLogin(userData))
+    // console.log(userData)
+
+    userLogin(userData)
   };
 
   const userLogin = async (userData) => {
-    const url = 'http://localhost:3000/api/v1/login'
+    const url = '/api/v1/login'
     const axiosConfig = {
       headers: {
         'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Origin':'http://localhost:3000',
+        // 'Authorization': `Bearer ${token}`,
       },
     };
-    const res = await axios.post(url, userData, axiosConfig.headers)
-    console.log(res)
+    try {
+      const res = await axios.post(url, userData, axiosConfig.headers)
+      sessionStorage.setItem('token', res.headers.authorization);
+      window.location.href = '/';
+    } catch(e) {
+      // setloginErrors(e.response)
+      console.log(e.response)
+    }
+    
   }
 
   return (
@@ -72,6 +88,11 @@ const LoginContainer = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {/* <Grid container>
+              <Grid item>
+                {  loginErrors }
+              </Grid>
+          </Grid> */}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -106,13 +127,8 @@ const LoginContainer = () => {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

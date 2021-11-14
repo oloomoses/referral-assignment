@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,29 +30,39 @@ function Copyright(props) {
 const theme = createTheme();
 
 const RegisterContainer = () => {
+  const [registerErrors, setregisterErrors] = useState()
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     const userData = {
-      username: data.get('username'),
-      email: data.get('email'),
-      password: data.get('password'),
+      user: {
+        username: data.get('username'),
+        email: data.get('email'),
+        password: data.get('password'),
+        password_confirmation: data.get('password_confirmation')
+      }        
     };
 
     userRegister(userData)
   };
 
   const userRegister = async (userData) => {
-    const url = 'http://localhost:3000/api/v1/signup'
+    const url = '/api/v1/signup'
     const axiosConfig = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post(url, userData, axiosConfig.headers)
-    console.log(res)
+    try {
+      const res = await axios.post(url, userData, axiosConfig.headers)
+      console.log(res.data)
+    } catch (e) {
+      // setregisterErrors(e.response.data)
+      console.log(e.response)
+    }
+    
   }
 
   return (
@@ -73,7 +83,13 @@ const RegisterContainer = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container>
+                <Grid item>
+                  {/* {  registerErrors } */}
+                </Grid>
+            </Grid>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -105,6 +121,17 @@ const RegisterContainer = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password_confirmation"
+                  label="Confirm Password"
+                  type="password"
+                  id="password_confirmation"
+                  autoComplete="new-password-confirmation"
                 />
               </Grid>
               <Grid item xs={12}>

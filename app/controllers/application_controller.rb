@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
     if resource.errors.empty?
       render json: resource
     else
-      validation_error(resource)
+      # validation_error(resource)
+      render json: resource.errors, status: 400
     end
   end
 

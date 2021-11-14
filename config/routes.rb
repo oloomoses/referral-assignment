@@ -20,5 +20,5 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
     }
 
-    # get '*path', to: 'home#index', via: :all
+    get '*path', to: 'home#index', via: :all
 end

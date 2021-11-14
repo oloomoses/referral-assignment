@@ -7,9 +7,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import PropTypes from 'prop-types';
 
 
-const Navbar = () => {
+const Navbar = ({logoutUser}) => {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -26,8 +27,7 @@ const Navbar = () => {
   };
 
   const logout = () => {
-    sessionStorage.removeItem('token');
-    window.location.href = '/login';
+    
   };
 
   return (
@@ -73,13 +73,17 @@ const Navbar = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={logout}>Sign Out</MenuItem>
+              <MenuItem onClick={logoutUser}>Sign Out</MenuItem>
             </Menu>
           </div>
         )}
       </Toolbar>
     </AppBar>
   );
+}
+
+Navbar.PropTypes = {
+  logoutUser: PropTypes.func.isRequired,
 }
 
 

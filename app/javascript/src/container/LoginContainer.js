@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-// import { Redirect } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -37,15 +36,12 @@ const LoginContainer = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     const userData = {
       user: {
         email: data.get('email'),
         password: data.get('password'),
       }        
     };
-
-    // console.log(userData)
 
     userLogin(userData)
   };
@@ -55,8 +51,6 @@ const LoginContainer = () => {
     const axiosConfig = {
       headers: {
         'Content-Type': 'application/json',
-        // 'Access-Control-Allow-Origin':'http://localhost:3000',
-        // 'Authorization': `Bearer ${token}`,
       },
     };
     try {
@@ -64,8 +58,7 @@ const LoginContainer = () => {
       sessionStorage.setItem('token', res.headers.authorization);
       window.location.href = '/';
     } catch(e) {
-      // setloginErrors(e.response)
-      console.log(e.response)
+      setloginErrors(e.response.data.error)
     }
     
   }
@@ -88,11 +81,11 @@ const LoginContainer = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          {/* <Grid container>
+          <Grid container>
               <Grid item>
                 {  loginErrors }
               </Grid>
-          </Grid> */}
+          </Grid>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"

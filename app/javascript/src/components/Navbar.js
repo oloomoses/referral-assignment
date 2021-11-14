@@ -26,12 +26,8 @@ const Navbar = ({logoutUser}) => {
     setAnchorEl(null);
   };
 
-  const logout = () => {
-    
-  };
-
   return (
-    <AppBar>
+    <AppBar position = "sticky">
       <Toolbar>
         <IconButton
           size="large"
@@ -43,7 +39,7 @@ const Navbar = ({logoutUser}) => {
           <HomeIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Hi Username
+          Hi {sessionStorage.getItem('username')}
         </Typography>
         {auth && (
           <div>
@@ -82,7 +78,7 @@ const Navbar = ({logoutUser}) => {
   );
 }
 
-Navbar.PropTypes = {
+Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
 }
 

@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :users, only: %[show]  
-      resource :referals, only: %[create]    
+      resources :users, only: %[show]  do
+        resource :referals, only: %[create]   
+      end
+       
     end
   end
 

@@ -6,17 +6,17 @@ module Api
 
 
       def create
-        referal = current_user.create(referal_params)
+        referal = current_user.referals.create(referal_params)
         
         if referal.save
-          render_resource(resource)
+          render_resource(referal)
         else
-          render json: task.errors, status: :unprocessable_entity
+          render json: referal.errors, status: :unprocessable_entity
         end
       end
 
       def referal_params
-        params.require(:referal).permit(:email)
+        params.permit(:email)
       end
 
     end

@@ -1,15 +1,24 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import HomeContainer from './container/HomeContainer'
-import LoginContainer from './container/LoginContainer'
-import RegisterContainer from './container/RegisterContainer'
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import HomeContainer from './container/HomeContainer';
+import LoginContainer from './container/LoginContainer';
+import RegisterContainer from './container/RegisterContainer';
+import NotFound from './components/NotFound';
 
 function App() {
+  const token = sessionStorage.getItem('token')
   return (
     <Routes>
-      <Route path='/' element={<HomeContainer />}/>
-      <Route path='/login' element={<LoginContainer />}/>
-      <Route path='/register' element={<RegisterContainer />}/>
+      {/* {
+        !token 
+        ? 
+        : 
+      } */}
+
+      <Route path='/' element={<HomeContainer />} />
+      <Route path='/user/login' element={<LoginContainer />}/>
+      <Route path='/user/register' element={<RegisterContainer />}/>
+      <Route path='*' element={<NotFound />} />
     </Routes>
   )
 }

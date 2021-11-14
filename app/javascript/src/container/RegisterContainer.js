@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -13,29 +12,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Link } from 'react-router-dom';
 
 const theme = createTheme();
 
 const RegisterContainer = () => {
-  const [registerErrors, setregisterErrors] = useState()
+  const [registerErrors, setregisterErrors] = useState([])
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     const userData = {
       user: {
         username: data.get('username'),
@@ -57,10 +43,12 @@ const RegisterContainer = () => {
     };
     try {
       const res = await axios.post(url, userData, axiosConfig.headers)
-      console.log(res.data)
+      sessionStorage.setItem('token', res.headers.authorization);
+      sessionStorage.setItem('id', res.data.id)
+      sessionStorage.setItem('username', res.data.username)
+      window.location.href = '/';
     } catch (e) {
-      // setregisterErrors(e.response.data)
-      console.log(e.response)
+      setregisterErrors(e.response.data)
     }
     
   }
@@ -87,7 +75,10 @@ const RegisterContainer = () => {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container>
                 <Grid item>
-                  {/* {  registerErrors } */}
+                  <p>{registerErrors.username ? `Username ${registerErrors.username[0]}` : '' }</p>
+                  <p>{registerErrors.email ? `Email ${registerErrors.email[0]}` : '' }</p>
+                  <p>{registerErrors.password ? `Password ${registerErrors.password[0]}` : '' }</p>
+                  <p>{registerErrors.password_confirmation ? `Password Confirmation ${registerErrors.password_confirmation[0]}` : '' }</p>
                 </Grid>
             </Grid>
             <Grid container spacing={2}>
@@ -151,14 +142,13 @@ const RegisterContainer = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to='/user/login'>
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

@@ -7,4 +7,6 @@ class User < ApplicationRecord
          jwt_revocation_strategy: JwtDenylist
   
   has_many :referals
+  validates :username, presence: true
+  validates :password_confirmation, presence: true
 end

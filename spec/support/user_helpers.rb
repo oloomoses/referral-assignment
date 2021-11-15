@@ -7,7 +7,8 @@ module UserHelpers
       :user,
       username: Faker::Internet.username,
       email: Faker::Internet.email,
-      password: 123_456_789   
+      password: 123_456_789,
+      password_confirmation: 123_456_789,
     )
   end
 
@@ -16,7 +17,8 @@ module UserHelpers
       :user,
       username: Faker::Internet.username,
       email: Faker::Internet.email,
-      password: 123_456_789
+      password: 123_456_789,
+      password_confirmation: 123_456_789,
     )
   end
 end

@@ -9,15 +9,14 @@ function App() {
   const token = sessionStorage.getItem('token')
   return (
     <Routes>
-      {/* {
-        !token 
-        ? 
-        : 
-      } */}
-
-      <Route path='/' element={<HomeContainer />} />
-      <Route path='/user/login' element={<LoginContainer />}/>
-      <Route path='/user/register' element={<RegisterContainer />}/>
+      <Route 
+        path='/' 
+        element={
+          token ? <HomeContainer /> : <Navigate to='/login' />
+        } 
+      />
+      <Route path='/login' element={<LoginContainer />}/>
+      <Route path='/register' element={<RegisterContainer />}/>
       <Route path='*' element={<NotFound />} />
     </Routes>
   )

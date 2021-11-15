@@ -2,8 +2,6 @@ module Api
   module V1
     class ReferalsController < ApplicationController
       before_action :authenticate_user!
-      # before_action :set_user, only: %[show]
-
 
       def create
         referal = current_user.referals.create(referal_params)

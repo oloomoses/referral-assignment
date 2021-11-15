@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 
 const Refer = () => {
-
+  const [referError, setreferError] = useState([])
   const handleSubmit = (event) => {
     event.preventDefault();
     
@@ -15,7 +15,7 @@ const Refer = () => {
       email: data.get('email'),     
     };
 
-    console.log(postReferal(userData))
+    postReferal(userData)
 
   };
 
@@ -29,9 +29,9 @@ const Refer = () => {
     };
     try {
       const res = await axios.post(url, userData, axiosConfig.headers)
-      console.log(res.data)
+      res.data
     } catch(e) {
-      console.log(e.response)
+      setreferError(e.response.data)
     }
     
   };
@@ -39,6 +39,8 @@ const Refer = () => {
   return (
     <div>
       <Box component="form" onSubmit={handleSubmit} noValidate lg={{ mt: 1 }}>
+
+      <p>{referError.email ? `Email ${referError.email[0]}` : '' }</p>
             <Box container xs={{
               display: 'flex',
               flexDirection: 'row',

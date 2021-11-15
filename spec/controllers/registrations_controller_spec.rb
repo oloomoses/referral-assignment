@@ -11,7 +11,8 @@ RSpec.describe 'Registrations', type: :request do
         user: {
           username: user.username,
           email: user.email,
-          password: user.password
+          password: user.password,
+          password_confirmation:user.password
         }
       }
     end

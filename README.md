@@ -1,4 +1,4 @@
-# Workout Tracker API
+# Refer React on Rails
 
 React on Rails authentication system with material UI. User can refer another user by email.
 
@@ -9,6 +9,8 @@ React on Rails authentication system with material UI. User can refer another us
 
 - Ruby v2.7.0
 - Ruby on Rails v6.1.3
+- React V6
+- Material UI
 - RSpec-Rails for testing
 
 ## Current API Endpoints
@@ -50,7 +52,7 @@ Install node_modules with:
 ```
 yarn install
 or
-rails run webpacker:install
+rails webpacker:install
 ```
 
 Setup database with:
@@ -120,4 +122,4 @@ Contributions are what make the open source community such an amazing place to b
 Give a ⭐️ if you like this project!
 
 ## Acknowledgement
-[Microverse Inc](https://www.microverse.org/)
+[DirectShifts](https://www.directshifts.com/)

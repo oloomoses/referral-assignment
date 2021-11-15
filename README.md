@@ -1,6 +1,6 @@
 # Refer React on Rails
 
-React on Rails authentication system with material UI. User can refer another user by email.
+React on Rails authentication system with material UI and devise gem. User can refer another user by email.
 
 ## Live Link
 - To be deployed soon on heroku

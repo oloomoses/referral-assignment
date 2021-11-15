@@ -11,7 +11,7 @@ import Refer from './Refer';
 const theme = createTheme();
 
 const HomeContainer = () => {
-  const [UserData, setUserData] = useState({})
+  const [referalData, setreferalData] = useState({})
   useEffect(() => {
     const getUser = async () => {
       const userId = sessionStorage.getItem('id')
@@ -23,7 +23,7 @@ const HomeContainer = () => {
       };
       try {
         const res = await axios.get(url, axiosConfig.headers)
-        setUserData(res.data)
+        setreferalData(res.data)
       } catch(e) {
         e
       }
@@ -62,7 +62,7 @@ const HomeContainer = () => {
             }}
           >
 
-            <User userData={UserData} />
+            <User referalData={referalData} />
             
           </Box>
         </Container>

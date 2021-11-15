@@ -1,20 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const User = ({userData}) => {
+const User = ({referalData}) => {
+  
   
 
   return (
     <div>
-     <strong>My email: {userData.email}</strong>
+     <strong>Users I have refered</strong><br/>
      <hr/>
-     <strong>Users I have refered</strong>
+      <ol>
+          {referalData.referals?.map((user, i) =>{
+
+            return (<li key={i}>{ user.email }</li>)
+
+          })}
+      </ol>
     </div>
   )
 }
 
 User.propType = {
-  userData: PropTypes.objectOf().isRequired,
+  referalData: PropTypes.objectOf().isRequired,
 }
 
 export default User

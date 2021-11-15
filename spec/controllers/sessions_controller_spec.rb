@@ -19,7 +19,7 @@ RSpec.describe 'Sessions', type: :request do
 
   context 'When password is missing' do
     before do
-      post login_url, params: { user: { email: user.email, password: nil }}
+      post login_url, params: { user: { email: user.email, password: nil } }
     end
 
     it 'returns 401' do
@@ -34,5 +34,4 @@ RSpec.describe 'Sessions', type: :request do
       expect(response).to have_http_status(204)
     end
   end
-
 end

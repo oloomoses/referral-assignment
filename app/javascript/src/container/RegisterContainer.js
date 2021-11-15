@@ -142,7 +142,7 @@ const RegisterContainer = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to='/user/login'>
+                <Link to='/login'>
                   Already have an account? Sign in
                 </Link>
               </Grid>

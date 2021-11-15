@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
-  
+
   def render_resource(resource)
     if resource.errors.empty?
       render json: resource
@@ -37,14 +37,14 @@ class ApplicationController < ActionController::Base
           }
         ]
     }, status: 401
-  end  
+  end
 
   def not_found
     render json: {
-      'errors': [
+      errors: [
         {
-          'status': '404',
-          'title': 'Not Found!'
+          status: '404',
+          title: 'Not Found!'
         }
       ]
     }, status: 404

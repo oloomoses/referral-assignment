@@ -5,7 +5,7 @@ module Api
 
       def create
         referal = current_user.referals.create(referal_params)
-        
+
         if referal.save
           render_resource(referal)
         else
@@ -16,7 +16,6 @@ module Api
       def referal_params
         params.permit(:email)
       end
-
     end
   end
 end

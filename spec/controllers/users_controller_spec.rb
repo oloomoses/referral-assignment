@@ -8,7 +8,7 @@ RSpec.describe 'Users', type: :request do
       login_with_api(user)
 
       get "/api/v1/users/#{user.id}", headers: {
-        'Authorization': response.headers['Authorization']
+        Authorization: response.headers['Authorization']
       }
     end
 
@@ -22,7 +22,7 @@ RSpec.describe 'Users', type: :request do
   end
 
   context 'When the authorization header is missing' do
-    before { get "/api/v1/users/#{user.id}"}
+    before { get "/api/v1/users/#{user.id}" }
 
     it 'returns 401' do
       expect(response.status).to eq(401)

@@ -4,7 +4,7 @@ RSpec.describe 'Registrations', type: :request do
   let(:user) { build_user }
   let(:existing_user) { create_user }
   let(:signup_url) { '/api/v1/signup' }
-  
+
   context 'When creating a new user' do
     before do
       post signup_url, params: {
@@ -12,13 +12,13 @@ RSpec.describe 'Registrations', type: :request do
           username: user.username,
           email: user.email,
           password: user.password,
-          password_confirmation:user.password
+          password_confirmation: user.password
         }
       }
     end
 
     it 'returns 200' do
-      expect(response.status).to eq(200)      
+      expect(response.status).to eq(200)
     end
 
     it 'returns a token' do
